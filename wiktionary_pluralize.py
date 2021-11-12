@@ -68,21 +68,20 @@ def pluralize(noun='', lang='all', noclip=False):
                         langs_plurals_dict[plural_form_tag.attrib['lang']].add(next_tag.text_content())
 
             #checking for declension table
-            else:
-                next_tag = word_tag.getparent().getnext()
-                while next_tag.getnext() is not None and (next_tag := next_tag.getnext()).tag != 'hr':
-                    if next_tag.tag == 'table':
-                        for el in next_tag.findall('tbody/tr/th[@class="case-column"]'):
-                            if el.text_content() == '\n':
-                                for i, th in enumerate(el.getparent().getchildren()):
-                                    if th.text_content() == 'plural\n':
-                                        #to get td tag right beneath plural column subsract 1
-                                        td_index = i - 1
-                                        break
-                                #going to the next row and getting the plural form from there
-                                language = el.getparent().getnext().cssselect('td')[td_index].getchildren()[0].attrib['lang']
-                                plural_form = el.getparent().getnext().cssselect('td')[td_index].text_content().strip()
-                                langs_plurals_dict[language].add(plural_form)
+            next_tag = word_tag.getparent().getnext()
+            while next_tag.getnext() is not None and (next_tag := next_tag.getnext()).tag != 'hr':
+                if next_tag.tag == 'table':
+                    for el in next_tag.findall('tbody/tr/th[@class="case-column"]'):
+                        if el.text_content() == '\n':
+                            for i, th in enumerate(el.getparent().getchildren()):
+                                if th.text_content() == 'plural\n':
+                                    #to get td tag right beneath plural column subsract 1
+                                    td_index = i - 1
+                                    break
+                            #going to the next row and getting the plural form from there
+                            language = el.getparent().getnext().cssselect('td')[td_index].getchildren()[0].attrib['lang']
+                            plural_form = el.getparent().getnext().cssselect('td')[td_index].text_content().strip()
+                            langs_plurals_dict[language].add(plural_form)
 
 
     if not langs_plurals_dict or lang == 'noclip':
