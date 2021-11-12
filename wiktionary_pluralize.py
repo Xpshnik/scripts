@@ -41,8 +41,9 @@ def pluralize(noun='', lang='all', noclip=False):
     page = requests.get('https://en.wiktionary.org/wiki/' + noun)
     tree = html.fromstring(page.content)
 
-    if 'Wiktionary does not yet have an entry' in tree.xpath('//*[@id="mw-content-text"]/div[1]/div/b'):
-        return f'\Wiktionary does not yet have an entry for {noun}.'
+    if 'Wiktionary does not yet have an entry' in tree.xpath('//*[@id="mw-content-text"]/div[1]/div/b')[0].text_content():
+        print(f'Wiktionary does not yet have an entry for {noun}.')
+        return None
     
     word_path = '//*[@id="mw-content-text"]/div[1]/p/strong'
 
