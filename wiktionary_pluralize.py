@@ -43,11 +43,8 @@ def pluralize(noun='', lang='all', noclip=False):
 
     if 'Wiktionary does not yet have an entry' in tree.xpath('//*[@id="mw-content-text"]/div[1]/div/b'):
         return f'\Wiktionary does not yet have an entry for {noun}.'
-
-    #for languages with plurals between perenthesis
+    
     word_path = '//*[@id="mw-content-text"]/div[1]/p/strong'
-
-    #else table before hr
 
     langs_plurals_dict = defaultdict(set)
     for word_tag in tree.xpath(word_path):
