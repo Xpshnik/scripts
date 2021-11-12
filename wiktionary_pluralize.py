@@ -8,7 +8,7 @@ import cssselect
 
 def pluralize(noun='', lang='all', noclip=False):
     """
-    A script that check for plural noun forms on Wiktionary.
+    A script that checks for plural noun forms on Wiktionary.
     The script can take three arguments, all of which are optional.
     First - word.
     Second - language.
