@@ -30,10 +30,9 @@ def pluralize(noun='', lang='all', noclip=False):
         uk: дні
 
     Example input 3:
-        python wiktionary_pluralize.py lehti noclip
+        python wiktionary_pluralize.py lehti fi noclip
     Output 2:
-        ru: дни
-        uk: дні
+        lehdet
     """
     
     if not noun:
@@ -86,7 +85,7 @@ def pluralize(noun='', lang='all', noclip=False):
                                 langs_plurals_dict[language].add(plural_form)
 
 
-    if not langs_plurals_dict:
+    if not langs_plurals_dict or lang == 'noclip':
         print('\nEither no plural form for the word is available or incorrect input.')
         print(pluralize.__doc__)
     elif lang == 'all':
