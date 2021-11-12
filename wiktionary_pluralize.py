@@ -3,8 +3,6 @@ from collections import defaultdict
 import pyperclip
 import requests
 from lxml import html
-import cssselect
-
 
 def pluralize(noun='', lang='all', noclip=False):
     """
